@@ -1,0 +1,46 @@
+:toc: left
+
+= asciidoctor-workflow: Quick prototyping script for creating rich html and pdfs from Asciidoctor documents
+
+https://github.com/dohliam/asciidoctor-workflow[Asciidoctor-workflow] is a small script for generating nice-looking web pages and pdf documents from Asciidoctor using a https://github.com/darshandsoni/asciidoctor-skins[CSS switcher]. This means that creating a webpage or a pdf is simply a matter of writing some content in Asciidoctor and choosing a CSS template from the https://github.com/darshandsoni/asciidoctor-skins[asciidoctor-skins] project, which can drastically reduce the amount of time required to put documentation online.
+
+== Requirements
+
+* https://www.ruby-lang.org/[ruby] and the https://github.com/asciidoctor/asciidoctor[asciidoctor] gem (>1.5)
+* https://github.com/wkhtmltopdf/wkhtmltopdf[wkhtmltopdf] for PDF support
+
+== Usage
+
+Given a plain Asciidoctor document, asciidoctor-workflow by default will create an html file with an embedded switcher, allowing you to cycle interactively through a list of CSS templates to see which one works best with your document. You can try this by https://github.com/dohliam/asciidoctor-workflow[cloning or downloading the project] and running the following command on this readme file from within the project directory:
+
+----
+/.asciidoctor_workflow.rb README.adoc
+----
+
+Once you have decided on a CSS template, just run asciidoctor_workflow.rb again with the `-s` option to generate a permanent file with your chosen CSS included:
+
+----
+./asciidoctor_workflow.rb -s notebook README.md
+----
+
+Use the `-p` option to create a PDF using your selected CSS template:
+
+----
+./asciidoctor_workflow.rb -ps notebook README.md
+----
+
+You can view an https://dohliam.github.io/asciidoctor-workflow[online demo] or https://dohliam.github.io/asciidoctor-workflow/asciidoctor-workflow.pdf[download a pdf] which is the result of running the above commands.
+
+== Known issues
+
+PDF generation is buggy at the moment and does not produce correct output for most stylesheets. This appears to be a bug with wkhtmltopdf. Feel free to submit a PR if you have a fix or can suggest a different pdf generator!
+
+== Related projects
+
+* https://github.com/darshandsoni/asciidoctor-skins[asciidoctor-skins] by @darshandsoni, the source of the CSS templates for Asciidoctor
+* https://github.com/dohliam/workflow[workflow], for a similar idea but with markdown
+* https://github.com/dohliam/dropin-minimal-css[dropin-minimal-css], on which this script and workflow are based
+
+== License
+
+MIT.
